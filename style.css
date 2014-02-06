@@ -1,0 +1,87 @@
+/* Based on werc.cat-v.org, suckless.org and garbe.us */
+
+/* General */
+body {
+	color: #aaa;
+	font-family: sans-serif;
+	font-size: 80%;
+	margin: 0;
+	padding: 0
+}
+
+/* Header */
+.header { background-color: #ccc; border: 0; }
+.header a { border: 0; color: #111; text-decoration: none; }
+.midHeader img { border: 0; }
+
+.headerTitle { font-size: 1.6em; font-weight: bold; margin: 0 0 0 0.5em; padding: 0.5em; }
+.headerTitle a { border: 0; text-decoration: none; }
+
+.headerSubTitle { font-size: 0.6em; font-weight: normal; margin-left: 1em; }
+
+/* Side */
+#side-bar {
+	width: 100%;
+	clear: both;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	background-color: #ddd;
+}
+
+#side-bar ul {
+	margin: 0;
+	padding: 0.3em;
+	list-style-type: none;
+	list-style-image: none;
+	border: 0;
+}
+
+#side-bar li { display: inline; line-height: 1.6em; white-space: nowrap; }
+
+#side-bar ul li a {
+	margin: 0;
+	padding: 0.1em 1ex 0.1em 1ex;
+	color: #336699;
+	background-color: transparent;
+	text-decoration: none;
+	font-size: 1em;
+	border: 0;
+}
+
+#side-bar ul li a:hover { color: #111; text-decoration: none; }
+ 
+/* Main Copy */
+#main {
+	max-width: 70em;
+	color: #111;
+	margin: 0 auto 0 2em;
+	padding: 1em 3em 2em 1em;
+	border: 0;
+}
+
+#main a { color: #336699; text-decoration: none; }
+#main a:hover { text-decoration: underline; }
+#main h1, #main-copy h2 { color: #666; }
+#main ul { list-style-type: square; }
+
+/* Footer */
+#footer {
+	background-color: #ddd;
+	color: #111;
+	font-size: 91%;
+	padding: 2em;
+	clear: both;
+}
+
+#footer .left { text-align: left; float: left; clear: left; }
+#footer .right { text-align: right; }
+#footer a { color: #111; text-decoration: none; }
+#footer a:hover { text-decoration: underline; }
+
+abbr, acronym { border-bottom: 1px dotted #333; cursor: help; }
+blockquote { border-left: 1px solid #333; font-style: italic; padding: 1em; }
+hr { border-width: 0 0 0.1em 0; border-color: #666; }
+
+code, pre { font-size: 1.1em }
+pre { margin-left: 2em; }
