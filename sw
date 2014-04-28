@@ -57,7 +57,7 @@ _header_
 	# Footer
 	cat << _footer_
 <div id="footer">
-<div class="right"><a href="http://nibble.develsec.org/projects/sw.html">Powered by sw</a></div>
+<div class="right"><a href="https://github.com/jroimartin/sw">Powered by sw</a></div>
 </div>
 </body>
 </html>
