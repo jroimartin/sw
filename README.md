@@ -36,9 +36,9 @@ clean:
 
 ## Author
 
-Nibble \<develsec.org\>
+* Nibble \<develsec.org\>
 
 ## Contributors
 
-pancake \<nopcode.org\>
-Andrew Antle
+* pancake \<nopcode.org\>
+* Andrew Antle
