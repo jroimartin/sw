@@ -25,8 +25,7 @@ The static version of the website is created under 'site.static'.
 
 The whole process can be automatized if you create a Makefile like this in your working directory:
 
-```
-$ cat Makefile
+```make
 all:
 	sw /path/to/site
 	rsync -avz site.static/ foo.org:/path/to/wwwroot/
