@@ -8,18 +8,18 @@ sw_filter() {
 }
 
 sw_main() {
-	$MDHANDLER $1
+	$MDHANDLER "$1"
 }
 
 sw_menu() {
 	echo "<ul>"
-	[ -z "`echo $1 | grep index.md`" ] && echo "<li><a href=\"index.html\">.</a></li>"
-	[ "`dirname $1`" != "." ] && echo "<li><a href=\"../index.html\">..</a></li>"
-	FILES=`ls \`dirname $1\` | sed -e 's,.md$,.html,g'`
+	[ -z "$(echo $1 | grep index.md)" ] && echo "<li><a href=\"index.html\">.</a></li>"
+	[ "$(dirname $1)" != "." ] && echo "<li><a href=\"../index.html\">..</a></li>"
+	FILES=$(ls $(dirname $1) | sed -e 's,.md$,.html,g')
 	for i in $FILES ; do
-		sw_filter $i && continue
-		NAME=`echo $i | sed -e 's/\..*$//' -e 's/_/ /g'`
-		[ -z "`echo $i | grep '\..*$'`" ] && i="$i/index.html"
+		sw_filter "$i" && continue
+		NAME=$(echo "$i" | sed -e 's/\..*$//' -e 's/_/ /g')
+		[ -z "$(echo $i | grep '\..*$')" ] && i="$i/index.html"
 		echo "<li><a href=\"$i\">$NAME</a></li>"
 	done
 	echo "</ul>"
@@ -42,17 +42,17 @@ _header_
 <body>
 <div class="header">
 <h1 class="headerTitle">
-<a href="`echo $1 | sed -e 's,[^/]*/,../,g' -e 's,[^/]*.md$,index.html,g'`">${TITLE}</a> <span class="headerSubtitle">${SUBTITLE}</span>
+<a href="$(echo $1 | sed -e 's,[^/]*/,../,g' -e 's,[^/]*.md$,index.html,g')">${TITLE}</a> <span class="headerSubtitle">${SUBTITLE}</span>
 </h1>
 </div>
 _header_
 	# Menu
 	echo "<div id=\"side-bar\">"
-	sw_menu $1
+	sw_menu "$1"
 	echo "</div>"
 	# Body
 	echo "<div id=\"main\">"
-	sw_main $1
+	sw_main "$1"
 	echo "</div>"
 	# Footer
 	cat << _footer_
@@ -65,16 +65,16 @@ _footer_
 }
 
 sw_style() {
-	if [ -f $CDIR/$STYLE ]; then
+	if [ -f "$CDIR/$STYLE" ]; then
 		echo '<style type="text/css">'
-		cat $CDIR/$STYLE
+		cat "$CDIR/$STYLE"
 		echo '</style>'
 	fi
 }
 
 # Set input dir
-IDIR="`echo $1 | sed -e 's,/*$,,'`"
-if [ -z "$IDIR" ] || [ ! -d $IDIR ]; then
+IDIR="$(echo $1 | sed -e 's,/*$,,')"
+if [ -z "$IDIR" ] || [ ! -d "$IDIR" ]; then
 	echo "Usage: sw [dir]"
 	exit 1
 fi
@@ -88,19 +88,19 @@ fi
 
 # Setup output dir structure
 CDIR=$PWD
-ODIR="$CDIR/`basename $IDIR`.static"
-rm -rf $ODIR
-mkdir -p $ODIR
-cp -rf $IDIR/* $ODIR
-rm -f `find $ODIR -type f -iname '*.md'`
+ODIR="$CDIR/$(basename $IDIR).static"
+rm -rf "$ODIR"
+mkdir -p "$ODIR"
+cp -rf $IDIR/* "$ODIR"
+rm -f $(find "$ODIR" -type f -iname '*.md') #TODO: can't find do that?
 
 # Parse files
-cd $IDIR
-FILES=`find . -iname '*.md' | sed -e 's,^\./,,'`
+cd "$IDIR" || exit 1
+FILES=$(find . -iname '*.md' | sed -e 's,^\./,,')
 for a in $FILES; do
-	b="$ODIR/`echo $a | sed -e 's,.md$,.html,g'`"
+	b="$ODIR/$(echo $a | sed -e 's,.md$,.html,g')"
 	echo "* $a"
-	sw_page $a > $b;
+	sw_page "$a" > "$b"
 done
 
 exit 0
