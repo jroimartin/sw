@@ -31,9 +31,10 @@ sw_page() {
 <!doctype html>
 <html>
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${TITLE}</title>
 <link rel="icon" href="/favicon.png" type="image/png">
-<meta charset="UTF-8">
 _header_
 	# Stylesheet
 	sw_style
