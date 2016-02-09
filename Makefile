@@ -15,3 +15,7 @@ install:
 	chmod +x ${P}/bin/md2html.awk
 	cp -f sw ${P}/bin/sw
 	chmod +x ${P}/bin/sw
+
+uninstall:
+	rm -f ${P}/bin/md2html.awk
+	rm -f ${P}/bin/sw
