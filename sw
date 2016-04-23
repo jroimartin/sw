@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # sw - suckless webframework - 2012 - MIT License - nibble <develsec.org>
 
 sw_filter() {
@@ -14,11 +14,10 @@ sw_main() {
 sw_menu() {
 	echo "<ul>"
 	[ -z "$(echo $1 | grep index.md)" ] && echo "<li><a href=\"index.html\">.</a></li>"
-	[ "$(dirname $1)" != "." ] && echo "<li><a href=\"../index.html\">..</a></li>"
-	FILES=$(ls $(dirname $1) | sed -e 's,.md$,.html,g')
-	for i in $FILES ; do
+	[ "$(dirname "$1")" != "." ] && echo "<li><a href=\"../index.html\">..</a></li>"
+	ls "$(dirname "$1")" | sed -e 's,.md$,.html,g' | while read i ; do
 		sw_filter "$i" && continue
-		NAME=$(echo "$i" | sed -e 's/\..*$//' -e 's/_/ /g')
+		NAME=$(echo $i | sed -e 's/\..*$//')
 		[ -z "$(echo $i | grep '\..*$')" ] && i="$i/index.html"
 		echo "<li><a href=\"$i\">$NAME</a></li>"
 	done
@@ -81,24 +80,23 @@ if [ -z "$IDIR" ] || [ ! -d "$IDIR" ]; then
 fi
 
 # Load config file
-if [ ! -f $PWD/sw.conf ]; then
+if [ ! -f "$PWD/sw.conf" ]; then
 	echo "Cannot find sw.conf in current directory"
 	exit 1
 fi
-. $PWD/sw.conf
+. "$PWD/sw.conf"
 
 # Setup output dir structure
 CDIR=$PWD
-ODIR="$CDIR/$(basename $IDIR).static"
+ODIR="$CDIR/$(basename "$IDIR").static"
 rm -rf "$ODIR"
 mkdir -p "$ODIR"
-cp -rf $IDIR/* "$ODIR"
-rm -f $(find "$ODIR" -type f -iname '*.md') #TODO: can't find do that?
+cp -rf "$IDIR"/* "$ODIR"
+find "$ODIR" -type f -iname '*.md' -delete
 
 # Parse files
 cd "$IDIR" || exit 1
-FILES=$(find . -iname '*.md' | sed -e 's,^\./,,')
-for a in $FILES; do
+find * -iname '*.md' | while read a ; do
 	b="$ODIR/$(echo $a | sed -e 's,.md$,.html,g')"
 	echo "* $a"
 	sw_page "$a" > "$b"
