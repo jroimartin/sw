@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # sw - suckless webframework - 2012 - MIT License - nibble <develsec.org>
 
 sw_filter() {
