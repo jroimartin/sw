@@ -17,7 +17,7 @@ body {
 .headerTitle { font-size: 1.6em; font-weight: bold; margin: 0 0 0 0.5em; padding: 0.5em; }
 .headerTitle a { border: 0; text-decoration: none; }
 
-.headerSubTitle { font-size: 0.6em; font-weight: normal; margin-left: 1em; }
+.headerSubtitle { font-size: 0.6em; font-weight: normal; margin-left: 1em; }
 
 /* Side */
 #side-bar {
